@@ -1,0 +1,78 @@
+{
+    "name": "maize-tech/laravel-model-expires",
+    "description": "Laravel Model Expires",
+    "keywords": [
+        "maize-tech",
+        "laravel",
+        "model",
+        "expires"
+    ],
+    "homepage": "https://github.com/maize-tech/laravel-model-expires",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Enrico De Lazzari",
+            "email": "enrico.delazzari@maize.io",
+            "role": "Developer"
+        },
+        {
+            "name": "Riccardo Dalla Via",
+            "email": "riccardo.dallavia@maize.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "illuminate/console": "^10.0",
+        "illuminate/database": "^10.0",
+        "illuminate/notifications": "^10.0",
+        "illuminate/support": "^10.0",
+        "spatie/laravel-package-tools": "^1.14.1"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "nunomaduro/collision": "^6.0",
+        "nunomaduro/larastan": "^2.0.1",
+        "orchestra/testbench": "^8.0",
+        "pestphp/pest": "^1.21",
+        "pestphp/pest-plugin-laravel": "^1.1",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpunit/phpunit": "^9.5",
+        "spatie/pest-plugin-test-time": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Maize\\ModelExpires\\": "src",
+            "Maize\\ModelExpires\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Maize\\ModelExpires\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Maize\\ModelExpires\\ModelExpiresServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
