@@ -40,8 +40,8 @@ trait HasExpiration
     }
 
     public function setExpiresAt(
-        Carbon $expiresAt = null,
-        Carbon $deletesAt = null
+        ?Carbon $expiresAt = null,
+        ?Carbon $deletesAt = null
     ): self {
         $this
             ->expiration()

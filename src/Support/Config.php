@@ -17,7 +17,7 @@ class Config
         return new $model;
     }
 
-    public static function defaultExpiresAt(int $days = null): ?Carbon
+    public static function defaultExpiresAt(?int $days = null): ?Carbon
     {
         $days ??= config('model-expires.model.expires_after_days');
 
@@ -34,7 +34,7 @@ class Config
             ->addDays($days);
     }
 
-    public static function defaultDeletesAt(int $days = null): ?Carbon
+    public static function defaultDeletesAt(?int $days = null): ?Carbon
     {
         $days ??= config('model-expires.model.deletes_after_days');
 
