@@ -97,11 +97,9 @@ trait HasExpiration
             return 0;
         }
 
-        return $expiresAt
-            ->startOfDay()
-            ->diffInDays(
-                now()->startOfDay()
-            );
+        return now()->startOfDay()->diffInDays(
+            $expiresAt->startOfDay()
+        );
     }
 
     public function getDaysLeftToDeletion(): ?int
