@@ -8,7 +8,7 @@ use Maize\ModelExpires\Tests\Support\Models\User;
 
 use function Spatie\PestPluginTestTime\testTime;
 
-it('can create model with default expiration', function ($model, $expiresAt, $deletesAt) {
+it('can create model with default expiration', function (string $model, ?int $expiresAt, ?int $deletesAt) {
     testTime()->freeze();
 
     $model::factory()->count(5)->create();
@@ -39,7 +39,7 @@ it('can create model with default expiration', function ($model, $expiresAt, $de
     ],
 ]);
 
-it('can set expires_at', function ($model, $index, $days, $default) {
+it('can set expires_at', function (string $model, int $index, int $days, ?Carbon $default) {
     $users = $model::factory()->count(3)->create();
 
     $expirations = Expiration::get();
@@ -70,7 +70,7 @@ it('can set expires_at', function ($model, $index, $days, $default) {
     ['model' => Tenant::class, 'index' => 2, 'days' => -10, 'default' => fn () => now()->startOfDay()->addDays(365)],
 ]);
 
-it('can get expires_at', function ($model, $index, $days, $default) {
+it('can get expires_at', function (string $model, int $index, int $days, ?Carbon $default) {
     testTime()->freeze();
 
     $users = $model::factory()->count(3)->create();
@@ -100,7 +100,7 @@ it('can get expires_at', function ($model, $index, $days, $default) {
     ['model' => Tenant::class, 'index' => 2, 'days' => -10, 'default' => fn () => now()->startOfDay()->addDays(365)],
 ]);
 
-it('can get isExpired', function ($model, $index, $months) {
+it('can get isExpired', function (string $model, int $index, int $months) {
     testTime()->freeze();
 
     $users = $model::factory()->count(3)->create();
@@ -128,7 +128,7 @@ it('can get isExpired', function ($model, $index, $months) {
     ['model' => Tenant::class, 'index' => 2, 'months' => 10],
 ]);
 
-it('can get getDaysLeftToExpiration', function ($model, $index, $days, $default, $remainingIndex, $remaining) {
+it('can get getDaysLeftToExpiration', function (string $model, int $index, int $days, ?int $default, int $remainingIndex, ?int $remaining) {
     testTime()->freeze();
 
     $users = $model::factory()->count(3)->create();
@@ -155,7 +155,7 @@ it('can get getDaysLeftToExpiration', function ($model, $index, $days, $default,
     ['model' => Tenant::class, 'index' => 2, 'days' => 10, 'default' => 365, 'remaining' => 6, 'remainingIndex' => fn () => 361],
 ]);
 
-it('can get canExpire', function ($model, $index, $days, $default) {
+it('can get canExpire', function (string $model, int $index, int $days, bool $default) {
     testTime()->freeze();
 
     $users = $model::factory()->count(3)->create();
