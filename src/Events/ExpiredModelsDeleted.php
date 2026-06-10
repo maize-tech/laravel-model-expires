@@ -11,6 +11,5 @@ class ExpiredModelsDeleted
     public function __construct(
         public string $model,
         public int $count
-    ) {
-    }
+    ) {}
 }
