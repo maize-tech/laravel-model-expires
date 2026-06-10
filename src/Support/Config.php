@@ -26,7 +26,7 @@ class Config
         }
 
         if ($days < 1) {
-            throw new Exception();
+            throw new Exception;
         }
 
         return now()
@@ -43,7 +43,7 @@ class Config
         }
 
         if ($days < 1) {
-            throw new Exception();
+            throw new Exception;
         }
 
         return static::defaultExpiresAt()

@@ -1,5 +1,8 @@
 <?php
 
+use Maize\ModelExpires\Models\Expiration;
+use Maize\ModelExpires\Notifications\ModelExpiringNotification;
+
 return [
 
     /*
@@ -11,7 +14,7 @@ return [
     |
     */
 
-    'expiration_model' => Maize\ModelExpires\Models\Expiration::class,
+    'expiration_model' => Expiration::class,
 
     'model' => [
 
@@ -66,7 +69,7 @@ return [
         |
         */
 
-        'notification' => Maize\ModelExpires\Notifications\ModelExpiringNotification::class,
+        'notification' => ModelExpiringNotification::class,
 
         /*
         |--------------------------------------------------------------------------

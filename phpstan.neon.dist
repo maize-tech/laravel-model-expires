@@ -10,5 +10,10 @@ parameters:
     tmpDir: build/phpstan
     checkOctaneCompatibility: true
     checkModelProperties: true
-    checkMissingIterableValueType: false
+    ignoreErrors:
+        # HasExpiration is the package's public API trait, consumed by host
+        # application models rather than by classes within the analysed paths.
+        -
+            identifier: trait.unused
+            path: src/HasExpiration.php
 

@@ -9,7 +9,7 @@ class Expiration extends Model
 {
     use HasFactory;
 
-    /** @var array<int, string> */
+    /** @var list<string> */
     protected $fillable = [
         'model_id',
         'model_type',
