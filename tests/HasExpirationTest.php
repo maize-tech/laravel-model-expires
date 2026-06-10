@@ -34,7 +34,7 @@ it('can create model with default expiration', function (string $model, ?int $ex
     ],
     [
         'model' => Tenant::class,
-        'expiresAt' => fn () => now()->startOfDay()->addDays(365)->timestamp,
+        'expiresAt' => now()->startOfDay()->addDays(365)->timestamp,
         'deletesAt' => null,
     ],
 ]);
@@ -64,10 +64,10 @@ it('can set expires_at', function (string $model, int $index, int $days, ?Carbon
     ['model' => User::class, 'index' => 1, 'days' => 4, 'default' => null],
     ['model' => User::class, 'index' => 2, 'days' => 20, 'default' => null],
     ['model' => User::class, 'index' => 2, 'days' => -10, 'default' => null],
-    ['model' => Tenant::class, 'index' => 0, 'days' => 2, 'default' => fn () => now()->startOfDay()->addDays(365)],
-    ['model' => Tenant::class, 'index' => 1, 'days' => 4, 'default' => fn () => now()->startOfDay()->addDays(365)],
-    ['model' => Tenant::class, 'index' => 2, 'days' => 20, 'default' => fn () => now()->startOfDay()->addDays(365)],
-    ['model' => Tenant::class, 'index' => 2, 'days' => -10, 'default' => fn () => now()->startOfDay()->addDays(365)],
+    ['model' => Tenant::class, 'index' => 0, 'days' => 2, 'default' => now()->startOfDay()->addDays(365)],
+    ['model' => Tenant::class, 'index' => 1, 'days' => 4, 'default' => now()->startOfDay()->addDays(365)],
+    ['model' => Tenant::class, 'index' => 2, 'days' => 20, 'default' => now()->startOfDay()->addDays(365)],
+    ['model' => Tenant::class, 'index' => 2, 'days' => -10, 'default' => now()->startOfDay()->addDays(365)],
 ]);
 
 it('can get expires_at', function (string $model, int $index, int $days, ?Carbon $default) {
@@ -94,10 +94,10 @@ it('can get expires_at', function (string $model, int $index, int $days, ?Carbon
     ['model' => User::class, 'index' => 1, 'days' => 4, 'default' => null],
     ['model' => User::class, 'index' => 2, 'days' => 20, 'default' => null],
     ['model' => User::class, 'index' => 2, 'days' => -10, 'default' => null],
-    ['model' => Tenant::class, 'index' => 0, 'days' => 2, 'default' => fn () => now()->startOfDay()->addDays(365)],
-    ['model' => Tenant::class, 'index' => 1, 'days' => 4, 'default' => fn () => now()->startOfDay()->addDays(365)],
-    ['model' => Tenant::class, 'index' => 2, 'days' => 20, 'default' => fn () => now()->startOfDay()->addDays(365)],
-    ['model' => Tenant::class, 'index' => 2, 'days' => -10, 'default' => fn () => now()->startOfDay()->addDays(365)],
+    ['model' => Tenant::class, 'index' => 0, 'days' => 2, 'default' => now()->startOfDay()->addDays(365)],
+    ['model' => Tenant::class, 'index' => 1, 'days' => 4, 'default' => now()->startOfDay()->addDays(365)],
+    ['model' => Tenant::class, 'index' => 2, 'days' => 20, 'default' => now()->startOfDay()->addDays(365)],
+    ['model' => Tenant::class, 'index' => 2, 'days' => -10, 'default' => now()->startOfDay()->addDays(365)],
 ]);
 
 it('can get isExpired', function (string $model, int $index, int $months) {
@@ -150,9 +150,9 @@ it('can get getDaysLeftToExpiration', function (string $model, int $index, int $
     ['model' => User::class, 'index' => 0, 'days' => -1, 'default' => null, 'remainingIndex' => 0, 'remaining' => null],
     ['model' => User::class, 'index' => 1, 'days' => 5, 'default' => null, 'remainingIndex' => 1, 'remaining' => null],
     ['model' => User::class, 'index' => 2, 'days' => 10, 'default' => null, 'remainingIndex' => 6, 'remaining' => null],
-    ['model' => Tenant::class, 'index' => 0, 'days' => -1, 'default' => 365, 'remaining' => 0, 'remainingIndex' => 361],
-    ['model' => Tenant::class, 'index' => 1, 'days' => 5, 'default' => 365, 'remaining' => 1, 'remainingIndex' => fn () => 361],
-    ['model' => Tenant::class, 'index' => 2, 'days' => 10, 'default' => 365, 'remaining' => 6, 'remainingIndex' => fn () => 361],
+    ['model' => Tenant::class, 'index' => 0, 'days' => -1, 'default' => 365, 'remainingIndex' => 0, 'remaining' => 361],
+    ['model' => Tenant::class, 'index' => 1, 'days' => 5, 'default' => 365, 'remainingIndex' => 1, 'remaining' => 361],
+    ['model' => Tenant::class, 'index' => 2, 'days' => 10, 'default' => 365, 'remainingIndex' => 6, 'remaining' => 361],
 ]);
 
 it('can get canExpire', function (string $model, int $index, int $days, bool $default) {
