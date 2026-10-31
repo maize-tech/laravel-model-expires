@@ -114,11 +114,9 @@ trait HasExpiration
             return 0;
         }
 
-        return $deletesAt
-            ->startOfDay()
-            ->diffInDays(
-                now()->startOfDay()
-            );
+        return now()->startOfDay()->diffInDays(
+            $deletesAt->startOfDay()
+        );
     }
 
     public function canExpire(): bool

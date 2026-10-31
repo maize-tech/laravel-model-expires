@@ -155,6 +155,33 @@ it('can get getDaysLeftToExpiration', function (string $model, int $index, int $
     ['model' => Tenant::class, 'index' => 2, 'days' => 10, 'default' => 365, 'remainingIndex' => 6, 'remaining' => 361],
 ]);
 
+it('can get getDaysLeftToDeletion', function (string $model, int $index, int $days, ?int $default, int $remainingIndex, ?int $remaining) {
+    testTime()->freeze();
+
+    $users = $model::factory()->count(3)->create();
+
+    expect($users[0]->getDaysLeftToDeletion())->toBe($default);
+    expect($users[1]->getDaysLeftToDeletion())->toBe($default);
+    expect($users[2]->getDaysLeftToDeletion())->toBe($default);
+
+    $date = now()->addDays($days);
+    $users[$index]->setExpiresAt(deletesAt: $date);
+
+    testTime()->addDays(4);
+
+    expect($users[$index]->getDaysLeftToDeletion())->toBe($remainingIndex);
+    foreach (Arr::except([0, 1, 2], $index) as $i) {
+        expect($users[$i]->getDaysLeftToDeletion())->toBe($remaining);
+    }
+})->with([
+    ['model' => User::class, 'index' => 0, 'days' => -1, 'default' => null, 'remainingIndex' => 0, 'remaining' => null],
+    ['model' => User::class, 'index' => 1, 'days' => 5, 'default' => null, 'remainingIndex' => 1, 'remaining' => null],
+    ['model' => User::class, 'index' => 2, 'days' => 10, 'default' => null, 'remainingIndex' => 6, 'remaining' => null],
+    ['model' => Tenant::class, 'index' => 0, 'days' => -1, 'default' => null, 'remainingIndex' => 0, 'remaining' => null],
+    ['model' => Tenant::class, 'index' => 1, 'days' => 5, 'default' => null, 'remainingIndex' => 1, 'remaining' => null],
+    ['model' => Tenant::class, 'index' => 2, 'days' => 10, 'default' => null, 'remainingIndex' => 6, 'remaining' => null],
+]);
+
 it('can get canExpire', function (string $model, int $index, int $days, bool $default) {
     testTime()->freeze();
 
