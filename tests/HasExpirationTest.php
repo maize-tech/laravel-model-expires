@@ -1,12 +1,16 @@
 <?php
 
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Date;
 use Maize\ModelExpires\Models\Expiration;
 use Maize\ModelExpires\Tests\Support\Models\Tenant;
 use Maize\ModelExpires\Tests\Support\Models\User;
 
 use function Spatie\PestPluginTestTime\testTime;
+
+afterEach(fn () => Date::useDefault());
 
 it('can create model with default expiration', function (string $model, ?int $expiresAt, ?int $deletesAt) {
     testTime()->freeze();
@@ -179,3 +183,25 @@ it('can get canExpire', function (string $model, int $index, int $days, bool $de
     ['model' => Tenant::class, 'index' => 1, 'days' => 5, 'default' => true],
     ['model' => Tenant::class, 'index' => 2, 'days' => 10, 'default' => true],
 ]);
+
+it('supports immutable dates', function () {
+    Date::use(CarbonImmutable::class);
+
+    testTime()->freeze();
+
+    $tenant = Tenant::factory()->create();
+
+    expect($tenant->getExpiresAt())
+        ->toBeInstanceOf(CarbonImmutable::class)
+        ->timestamp->toBe(now()->startOfDay()->addDays(365)->timestamp);
+
+    $tenant->setExpiresAt(
+        expiresAt: now()->addDays(10),
+        deletesAt: now()->addDays(20),
+    );
+
+    expect($tenant->getExpiresAt()->timestamp)->toBe(now()->addDays(10)->startOfDay()->timestamp);
+    expect($tenant->getDeletesAt()->timestamp)->toBe(now()->addDays(20)->startOfDay()->timestamp);
+    expect($tenant->getDaysLeftToExpiration())->toBe(10);
+    expect($tenant->isExpired())->toBeFalse();
+});

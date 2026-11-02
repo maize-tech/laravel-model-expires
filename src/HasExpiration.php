@@ -2,9 +2,9 @@
 
 namespace Maize\ModelExpires;
 
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Notification;
 use Maize\ModelExpires\Events\ExpiredModelsDeleted;
@@ -40,8 +40,8 @@ trait HasExpiration
     }
 
     public function setExpiresAt(
-        ?Carbon $expiresAt = null,
-        ?Carbon $deletesAt = null
+        ?CarbonInterface $expiresAt = null,
+        ?CarbonInterface $deletesAt = null
     ): self {
         $this
             ->expiration()
@@ -56,24 +56,24 @@ trait HasExpiration
         return $this;
     }
 
-    protected static function defaultExpiresAt(): ?Carbon
+    protected static function defaultExpiresAt(): ?CarbonInterface
     {
         return Config::defaultExpiresAt();
     }
 
-    protected static function defaultDeletesAt(): ?Carbon
+    protected static function defaultDeletesAt(): ?CarbonInterface
     {
         return Config::defaultDeletesAt();
     }
 
-    public function getExpiresAt(): ?Carbon
+    public function getExpiresAt(): ?CarbonInterface
     {
         return $this
             ->expiration()
             ->value('expires_at');
     }
 
-    public function getDeletesAt(): ?Carbon
+    public function getDeletesAt(): ?CarbonInterface
     {
         return $this
             ->expiration()
