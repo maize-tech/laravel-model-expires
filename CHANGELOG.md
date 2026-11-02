@@ -2,6 +2,16 @@
 
 All notable changes to `laravel-model-expires` will be documented in this file.
 
+## 1.3.0 - 2026-11-02
+
+### What's Changed
+
+* Allow installing Laravel versions with security advisories in CI by @enricodelazzari in https://github.com/maize-tech/laravel-model-expires/pull/25
+* Support immutable dates for model expirations by @enricodelazzari in https://github.com/maize-tech/laravel-model-expires/pull/23
+* Fix negative days left to deletion by @enricodelazzari in https://github.com/maize-tech/laravel-model-expires/pull/24
+
+**Full Changelog**: https://github.com/maize-tech/laravel-model-expires/compare/1.2.0...1.3.0
+
 ## 1.2.0 - 2026-06-10
 
 ### What's Changed
